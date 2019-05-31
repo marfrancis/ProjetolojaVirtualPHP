@@ -50,6 +50,8 @@
       </div>
       <div class="modal-body">
       <div class="form-group">
+        <form method="POST"  action="sucesso.php">
+          <input type="text" name="nomeProduto" value="<?php echo $produto["nome"];?>" hidden>
       <input type="text" name="nomeCliente" placeholder-"Nome Completo" >
       </div>
        <div class="form-group">
@@ -67,8 +69,9 @@
         
       </div>
       <div class="modal-footer">
-        <div class="btn btn-secondary" >Preço total:R$<?php echo $produto["preco"];?></div>
-        <button type="button" class="btn btn-success">Finalizar compra</button>
+        <div class="btn btn-secondary">Preço total:R$<?php echo $produto["preco"];?></div>
+        <button type="submit" class="btn btn-success">Finalizar compra</button>
+        </form>
       </div>
     </div>
   </div>
