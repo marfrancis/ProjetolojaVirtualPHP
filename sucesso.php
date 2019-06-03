@@ -1,39 +1,72 @@
-<?php
+<?php 
 
-if($_POST){
-    if($_POST['nomeCliente'] == ""){
-        header("location:index.php");
+include_once "funcoes.php";
+
+function validarCompra($dadosCompras){
+    $erros = [];
+    if(!$dadosCompras){
+        $erros[] = "Não foi recebido nenhum dado para realizar a compra!";
+        
     }
-    $nomeCompleto = $_POST['nomeCliente'];
-    $nomeProduto = $_POST['nomeProduto'];
-    
-} else {
-    
-    
-    
+
+    if(!validarNome($dadosCompras['nomeCliente'])){
+        $erros[] = "Verifique se seu nome esta correto, e se é maior que 2 caracteres!";
+    }
+    if(!validarCpf($dadosCompras['cpfCliente'])){
+        $erros[] = "CPF inválido, tentar novamente";
+    }
+    if(!validarCartao($dadosCompras['cartaoCliente'])){
+        $erros[] = "numero de cartao invalido";
+    }
+    if(!validarDataValidade($dadosCompras['dataValidadeCartao'])){
+        $erros[] = "Cartão com data vencida!";
+    }
+    if(!validarCVV($dadosCompras['cvvCartao'])){
+        $erros[] = "Numero de CVV inválido";
+    }
+    return $erros;
+
 }
 
-?>
+$errosValidacao = validarCompra($_POST);
+
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
 <?php include "head.php"; ?>
 <body>
 <?php include "header.php"; ?>
-<main class="container"></main>
-<section class="row">
-<div class="col-md-12">
-<div class="alert alert-success" role="alert">
-Olá <?php echo $nomeCompleto; ?> Parabéns pela sua compra do produto <?php echo $nomeProduto ?>
-</div>
-    <div class="col-md-12">
-        <a href="index.php" class="btn btn-primary"> Voltar para home</a>
-    </div>
+
+    <main class="container">
+        <section class="row">
+    <?php if(count($errosValidacao) >0): ?>
+
+        <div class="col-md-12">
+        
+        <ul>
+        <?php foreach($errosValidacao as $erro): ?>
+        <li><?php echo $erro; ?></li>
+            <?php endforeach; ?>    
+        
+        </ul>
+
+        </div>
+        <?php else: ?>
+
+           <div class="col-md-12">
+                <div class="alert alert-success" role="alert">
+                Olá <?php echo $_POST['nomeCliente']; ?> Parabéns pela sua compra do produto <?php echo $_POST['nomeProduto']; ?>
+            </div>
+            <?php endif ?>
+            <div class="col-md-12">
+            <a href="index.php" class="btn btn-primary"> Voltar para home</a>
+            </div>
 
 </div>
-</section>
+        </section>
+
 </main>
-
-
+    
 </body>
 </html>
