@@ -4,13 +4,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include"head.php" ?>
+<?php include"head.php";
+?>
 
 <body>
-<?php include"header.php"; ?>
+<?php include"header.php"; 
+
+?>
     
     <main class="container mt-5">
          <section class="row">
+
         <!-- inicio segurar card -->
             <?php foreach($produtos as $chave=>$produto) { ?>
             <div class="col-md-4 mt-3">
@@ -20,7 +24,7 @@
                         <h5 class="card-title"><?php echo $produto['nome'];?></h5>
                         <p class="card-text"><?php echo $produto['descricao'];?></p>
                         <h4 class="text-success">R$<?php echo $produto['preco'];?></h4>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $chave; ?>">Comprar</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $produto['id']; ?>">Comprar</button>
                         
                     </div>
                 </div>
@@ -37,9 +41,9 @@
 
 
 <!-- Modal -->
-<?php foreach($produtos as $chave=> $produtos): ?>
+<?php foreach($produtos as $chave=> $produto): ?>
 
-<div class="modal fade" id="<?php echo $chave?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="<?php echo $produto["id"];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -71,6 +75,7 @@
       <div class="modal-footer">
         <div class="btn btn-secondary">Preço total:R$<?php echo $produto["preco"];?></div>
         <button type="submit" class="btn btn-success">Finalizar compra</button>
+
         </form>
       </div>
     </div>

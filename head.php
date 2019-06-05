@@ -5,16 +5,12 @@ $usuario = logarUsuario('Marcelo Ribeiro',1);
 
 // $usuario = [];
 
-$produtos = [
-    "produto1" => ["nome"=>"Curso Fullstack","descricao"=>"O curso fullstack ensina programação","preco"=> 1200,"img"=>"img/prod1.jpg"],
-    "produto2" => ["nome"=>"Curso Mobile Android","descricao"=>"O curso Mobile ensina App","preco"=> 1400,"img"=>"img/prod2.jpg"],
-    "produto3" => ["nome"=>"Curso Mobile Android","descricao"=>"O curso Mobile ensina App","preco"=> 1400,"img"=>"img/prod3.jpg"],
-    "produto4" => ["nome"=>"Curso Mobile Android","descricao"=>"O curso Mobile ensina App","preco"=> 1400,"img"=>"img/prod4.jpg"],
-    "produto5" => ["nome"=>"Curso Mobile Android","descricao"=>"O curso Mobile ensina App","preco"=> 1400,"img"=>"img/prod5.png"],
-    "produto6" => ["nome"=>"Curso Mobile Android","descricao"=>"O curso Mobile ensina App","preco"=> 1400,"img"=>"img/prod6.jpg"]
-];
+$jsonProdutos = file_get_contents('Produtos.json');
+$produtos = json_decode($jsonProdutos, true);
+$produtos = $produtos['Produtos'];
 
-$produtos = addProduto("Curso de UX","Curso Top", 2000, 'img/prod1.jpg',$produtos);
+addProduto("Curso Mobile Android","Curso para criar um app",2300,"img/prod1.jpg")
+
 ?>
 <head>
     <meta charset="UTF-8">
