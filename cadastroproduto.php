@@ -11,7 +11,6 @@
     <section class="row">
         <div class="col-md-6">
         <form action="salvarproduto.php" method="post" enctype="multipart/form-data">
-<form>
   <div class="form-group">
     <label for="nomeProduto">Nome do Produto</label>
     <input type="text" name="nomeProduto" class="form-control" id="nomeProduto" placeholder="digite o nome do produto">

@@ -23,6 +23,8 @@ file_put_contents('Produtos.json', $jsonProdutos);
 }
 
 
+
+
 function validarNome($nome){
     return $nome != "" && strlen($nome) >=3;
 
@@ -44,4 +46,21 @@ function validarDataValidade($dataValidade){
 
 function validarCVV($cvv){
     return  strlen($cvv) == 3;
+}
+
+function addUsuario($nomeUsuario,$emailUsuario,$senhaUsuario,$niveldeAcesso){
+
+    $jsonUsuarios = file_exists("usuarios.json")? file_get_contents('usuarios.json'):"";
+    $usuarios = json_decode($jsonUsuarios, true);
+    
+   $itensusuarios = is_array($usuarios['usuarios'])?count($usuarios['usuarios']):0;
+   $chave = $itensusuarios + 1; // pergunta quantos itens tem no array
+   $novoUsuario=["id"=>"usuario$chave",'nomeUsuario'=>$nomeUsuario,'email'=>$emailUsuario,'senha'=>$senhaUsuario,'niveldeAcesso'=>$niveldeAcesso];
+  
+   
+
+    $usuarios["usuarios"][]=$novoUsuario;
+    $jsonUsuarios = json_encode($usuarios);
+    
+    return file_put_contents('usuarios.json', $jsonUsuarios);
 }
