@@ -35,10 +35,11 @@ foreach($usuarios['usuarios']as $key => $usuario){
 }
 
 if(isset($usuarioExiste) && password_verify($senha,$usuarioExiste['senha'])){
+    logarUsuario($usuarioExiste['nomeUsuario'], $usuarioExiste['nivelAcesso']);
     header('location:index.php');
 
 } else {
         echo"Email ou senha inválida, tente novamente!";
         echo '<a class="btn btn-primary" href="login.php">Voltar para pagina de login!</a>';
 
-}
+}   

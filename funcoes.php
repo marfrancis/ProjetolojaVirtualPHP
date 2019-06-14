@@ -1,8 +1,11 @@
 <?php 
+session_start();
 
 function logarUsuario($nome, $nivelAcesso){
     $usuario = ["logado"=>true,'nome'=>$nome, "nivelAcesso"=> $nivelAcesso];
-    return $usuario;
+  
+    $_SESSION['usuario'] = $usuario;
+    
 
 }
 
@@ -12,14 +15,14 @@ function addProduto($nome,$descricao,$preco,$img){
     $produtos = json_decode($jsonProdutos, true);
     
    
-   $chave = count($produtos) + 1;
-   $novoProduto=["id"=>"produto$chave",'nome'=>$nome,'descricao'=>$descricao,'preco'=>$preco,'img'=>$img];
-   $produtos["produto$chave"] = $novoProduto;
+    $chave = count($produtos) + 1;
+    $novoProduto=["id"=>"produto$chave",'nome'=>$nome,'descricao'=>$descricao,'preco'=>$preco,'img'=>$img];
+    $produtos["produto$chave"] = $novoProduto;
 
-$produtos["Produtos"][]=$novoProduto;
-$jsonProdutos = json_encode($produtos);
-file_put_contents('Produtos.json', $jsonProdutos);
-   return true;
+    $produtos["Produtos"][]=$novoProduto;
+    $jsonProdutos = json_encode($produtos);
+    file_put_contents('Produtos.json', $jsonProdutos);
+    return true;
 }
 
 
@@ -53,9 +56,9 @@ function addUsuario($nomeUsuario,$emailUsuario,$senhaUsuario,$niveldeAcesso){
     $jsonUsuarios = file_exists("usuarios.json")? file_get_contents('usuarios.json'):"";
     $usuarios = json_decode($jsonUsuarios, true);
     
-   $itensusuarios = is_array($usuarios['usuarios'])?count($usuarios['usuarios']):0;
-   $chave = $itensusuarios + 1; // pergunta quantos itens tem no array
-   $novoUsuario=["id"=>"usuario$chave",'nomeUsuario'=>$nomeUsuario,'email'=>$emailUsuario,'senha'=>$senhaUsuario,'niveldeAcesso'=>$niveldeAcesso];
+    $itensusuarios = is_array($usuarios['usuarios'])?count($usuarios['usuarios']):0;
+    $chave = $itensusuarios + 1; // pergunta quantos itens tem no array
+    $novoUsuario=["id"=>"usuario$chave",'nomeUsuario'=>$nomeUsuario,'email'=>$emailUsuario,'senha'=>$senhaUsuario,'niveldeAcesso'=>$niveldeAcesso];
   
    
 

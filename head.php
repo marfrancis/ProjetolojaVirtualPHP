@@ -1,7 +1,8 @@
 <?php
 
 include_once"funcoes.php";
-$usuario = logarUsuario('Marcelo Ribeiro',1);
+
+$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:"";
 
 // $usuario = [];
 
